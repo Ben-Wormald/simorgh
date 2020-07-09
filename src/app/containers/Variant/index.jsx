@@ -1,7 +1,6 @@
 import React from 'react';
 import text from '../Text';
 import Blocks from '../Blocks';
-// import { textModelPropTypes } from '#models/propTypes/text';
 
 const componentsToRender = { text };
 
@@ -14,9 +13,5 @@ const VariantContainer = ({ blocks }) => {
     </>
   );
 };
-
-// VariantContainer.propTypes = {
-//   ...textModelPropTypes,
-// };
 
 export default VariantContainer;

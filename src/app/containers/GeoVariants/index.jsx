@@ -1,7 +1,6 @@
 import React from 'react';
 import variant from '../Variant';
 import Blocks from '../Blocks';
-// import { textModelPropTypes } from '#models/propTypes/text';
 
 const componentsToRender = { variant };
 
@@ -16,9 +15,5 @@ const GeoVariantsContainer = ({ blocks }) => {
     </>
   );
 };
-
-// GeoVariantsContainer.propTypes = {
-//   ...textModelPropTypes,
-// };
 
 export default GeoVariantsContainer;
