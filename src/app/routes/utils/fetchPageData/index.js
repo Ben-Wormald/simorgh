@@ -1,4 +1,5 @@
 import 'isomorphic-fetch';
+import fs from 'fs';
 import nodeLogger from '#lib/logger.node';
 import onClient from '#lib/utilities/onClient';
 import { getQueryString, getUrlPath } from '#lib/utilities/urlParser';
@@ -25,6 +26,12 @@ const baseUrl = onClient()
 
 export const getUrl = pathname => {
   if (!pathname) return '';
+
+  const pathnameParts = pathname.split('/');
+
+  // return `https://optimo.test.api.bbci.co.uk/asset/${pathnameParts[pathnameParts.length - 1]}`;
+
+  console.log('FETCH', pathname);
 
   const params = isLive() ? '' : getQueryString(pathname);
   const basePath = getUrlPath(pathname);

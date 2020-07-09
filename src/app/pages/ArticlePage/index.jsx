@@ -24,6 +24,7 @@ import { ServiceContext } from '#contexts/ServiceContext';
 import headings from '#containers/Headings';
 import text from '#containers/Text';
 import image from '#containers/Image';
+import geoVariants from '#containers/GeoVariants';
 import Blocks from '#containers/Blocks';
 import timestamp from '#containers/ArticleTimestamp';
 import { GridWrapper } from '#lib/styledGrid';
@@ -55,6 +56,7 @@ const componentsToRender = {
   text,
   image,
   timestamp,
+  'geo-block': geoVariants,
 };
 
 const StyledMain = styled.main`
