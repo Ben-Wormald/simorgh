@@ -37,7 +37,7 @@ const GeoVariantsContainer = ({ blocks }) => {
           console.log("Request failed", error);
         });
     }
-  
+
     console.log('ABOUT TO FETCH');
     fetchData(1, 1);
   }, []);
@@ -47,7 +47,8 @@ const GeoVariantsContainer = ({ blocks }) => {
 
   if (!blocks) return null;
 
-  const chosenVariant = blocks.find(block => block.model.variantKey === council);
+  // const chosenVariant = blocks.find(block => block.model.variantKey === council);
+  const chosenVariant = blocks[Math.floor(Math.random() * blocks.length)];
 
   return (
     <>
