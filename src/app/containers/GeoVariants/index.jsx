@@ -4,7 +4,9 @@ import Blocks from '../Blocks';
 
 const componentsToRender = { variant };
 
-const GeoVariantsContainer = ({ blocks }) => {
+const GeoVariantsContainer = ({ blocks, areaCode }) => {
+
+  // console.log('HELLO areaCode', areaCode);
 
   const [council, setCouncil] = useState('variant-1');
 
@@ -41,14 +43,17 @@ const GeoVariantsContainer = ({ blocks }) => {
     console.log('ABOUT TO FETCH');
     fetchData(1, 1);
   }, []);
-  console.log('RENDERING');
+  // console.log('RENDERING');
 
   // navigator.geolocation.getCurrentPosition(success, error);
 
   if (!blocks) return null;
 
-  // const chosenVariant = blocks.find(block => block.model.variantKey === council);
-  const chosenVariant = blocks[Math.floor(Math.random() * blocks.length)];
+  let chosenVariant;
+  chosenVariant = blocks.find(block => block.model.variantKey === areaCode);
+  if (!chosenVariant) {
+    chosenVariant = blocks[Math.floor(Math.random() * blocks.length)];
+  }
 
   return (
     <>

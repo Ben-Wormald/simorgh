@@ -1,7 +1,7 @@
 import React from 'react';
 import { objectOf, arrayOf, func, shape, string, any } from 'prop-types';
 
-const Blocks = ({ blocks, componentsToRender }) =>
+const Blocks = ({ blocks, componentsToRender, areaCode }) =>
   blocks.map((block, index) => {
     const { type, model, id, position } = block;
 
@@ -22,6 +22,7 @@ const Blocks = ({ blocks, componentsToRender }) =>
         position={position}
         type={type}
         typeOfPreviousBlock={typeOfPreviousBlock}
+        areaCode={areaCode}
         {...model}
       />
     );

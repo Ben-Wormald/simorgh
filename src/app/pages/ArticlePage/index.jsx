@@ -81,7 +81,8 @@ const ArticlePageMostReadSection = styled(MostReadSection)`
   }
 `;
 
-const ArticlePage = ({ pageData, mostReadEndpointOverride }) => {
+const ArticlePage = ({ pageData, areaCode, mostReadEndpointOverride }) => {
+  console.log('ARTICLE PAGE DATA', areaCode);
   const { articleAuthor } = useContext(ServiceContext);
   const headline = getHeadline(pageData);
   const description = getSummary(pageData) || getHeadline(pageData);
@@ -131,6 +132,7 @@ const ArticlePage = ({ pageData, mostReadEndpointOverride }) => {
           <Blocks
             blocks={path(['content', 'model', 'blocks'], pageData)}
             componentsToRender={componentsToRender}
+            areaCode={areaCode}
           />
         </GridWrapper>
       </StyledMain>
