@@ -13,7 +13,7 @@ import { response } from 'express';
 
 const httpClient = new HttpClient();
 
-const useTestOptimo = false
+const useTestOptimo = true;
 
 const logger = nodeLogger(__filename);
 const STATUS_OK = 200;
@@ -195,7 +195,7 @@ const handleOptimoResponse = optimoAsset => ({
     },
     promo: {
       "headlines": {
-        "seoHeadline": optimoAsset.meta.seoHeadline,
+        "seoHeadline": optimoAsset.meta && optimoAsset.meta.seoHeadline || 'Optimo Article',
       },
       "id": "urn:bbc:ares::article:c6v11qzyv8po",
       "locators": {
