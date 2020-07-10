@@ -13,7 +13,7 @@ import { response } from 'express';
 
 const httpClient = new HttpClient();
 
-const useTestOptimo = true;
+const useTestOptimo = false;
 
 const logger = nodeLogger(__filename);
 const STATUS_OK = 200;

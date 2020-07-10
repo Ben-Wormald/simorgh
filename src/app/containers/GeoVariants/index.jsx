@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import variant from '../Variant';
 import Blocks from '../Blocks';
 
@@ -6,48 +6,48 @@ const componentsToRender = { variant };
 
 const GeoVariantsContainer = ({ blocks }) => {
 
-  const fetchData = (lat, lon) => {
-    fetch(
-      `https://locator-service.test.api.bbci.co.uk/locations?la=${lat}&lo=${lon}&rs=1&pt=region&api_key=xxxx`
-    )
-    .then((response) => response.json())
-    .then((data) => {
-      const geoId = data.response.results.results[0].id;
-      return fetch(
-        `https://locator-service.api.bbci.co.uk/locations/${geoId}/details/gss-council?api_key=xxxxx`
-      );
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      const council = data
-        .response.details.find(
-          (detail) => detail.data.entityTheme === "Administrative"
-        );
-      return setCouncil(council.externalId);
-    })
-    .catch((error) => {
-      console.log("Request failed", error);
-    });
-  }
+  const [council, setCouncil] = useState('variant-1');
 
-  navigator.geolocation.getCurrentPosition(success, error);
+  useEffect(() => {
+    console.log('USE EFFECT');
+    const fetchData = async (lat, lon) => {
+      fetch(
+        `https://locator-service.test.api.bbci.co.uk/locations?la=${lat}&lo=${lon}&rs=1&pt=region&api_key=${process.env.LOCATOR_API_KEY}`
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('DATA 1', data);
+          const geoId = data.response.results.results[0].id;
+          console.log('geoid', geoId);
+          return fetch(
+            `https://locator-service.test.api.bbci.co.uk/locations/${geoId}/details/gss-council?api_key=${process.env.LOCATOR_API_KEY}`
+          );
+        })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log('DATA', data);
+          const council = data
+            .response.details.find(
+              (detail) => detail.data.entityTheme === "Administrative"
+            );
+          console.log('COUNCIL DATA', council);
+          return setCouncil(council.externalId);
+        })
+        .catch((error) => {
+          console.log("Request failed", error);
+        });
+    }
+  
+    console.log('ABOUT TO FETCH');
+    fetchData(1, 1);
+  }, []);
+  console.log('RENDERING');
 
-  function success(pos) {
-    const {latitude, longitude} = pos.coords;
-
-    console.log("Your current position is:");
-    console.log(`Latitude : ${latitude}`);
-    console.log(`Longitude: ${longitude}`);
-    fetchData(latitude, longitude);
-  }
-
-  function error(err) {
-    console.warn(`ERROR(${err.code}): ${err.message}`);
-  }
+  // navigator.geolocation.getCurrentPosition(success, error);
 
   if (!blocks) return null;
 
-  const chosenVariant = blocks.find(block => block.model.variantKey === 'variant-2');
+  const chosenVariant = blocks.find(block => block.model.variantKey === council);
 
   return (
     <>
